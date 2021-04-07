@@ -95,16 +95,27 @@ def get_mod(id):
     ----------
     id : int
         CurseForge Project Id
+    
+    Raises
+    ------
+    ValueError
+        If no mod for specified Project Id is found
     """
-    files = get_mod_files(id)
+    try:
+        files = get_mod_files(id)
 
-    res = urllib.request.urlopen(API_URL + str(id))
-    res_body = res.read()
-    j = json.loads(res_body.decode('utf-8'))
+        res = urllib.request.urlopen(API_URL + str(id))
+        res_body = res.read()
+        j = json.loads(res_body.decode('utf-8'))
 
-    fgv = {}
-    for f in j['gameVersionLatestFiles']:
-        fgv[f['gameVersion']] = int(f['projectFileId'])
+        fgv = {}
+        for f in j['gameVersionLatestFiles']:
+            fgv[f['gameVersion']] = int(f['projectFileId'])
 
-    mod = Mod(int(j['id']), j['name'], j['slug'], files, j['defaultFileId'], fgv)
-    return mod
+        mod = Mod(int(j['id']), j['name'], j['slug'], files, j['defaultFileId'], fgv)
+        return mod
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            raise ValueError('No mod for specified Project Id found')
+        else:
+            raise
