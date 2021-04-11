@@ -14,8 +14,8 @@ class CurseForge:
         res_body = res.read()
         j = json.loads(res_body.decode('utf-8'))
 
-        for modFile in j:
-            f = ModFile(modFile)
+        for mod_file in j:
+            f = ModFile(mod_file)
             files.append(f)
 
         return files

@@ -15,13 +15,13 @@ def main():
     print_file(mod.get_file_by_game_version("1.7.2"))
     print_file(mod.get_file_by_game_version("1.0.0"))
 
-def print_file(modFile):
-    print('Filename: ' + modFile.name)
-    print('Date: ' + modFile.date)
-    print('Size: ' + format(modFile.length/1024/1024, '.2f') + 'MB')
-    print('Release Type: ' + modFile.releaseType.name)
-    print('Game Versions: ' + ', '.join(modFile.gameVersions))
-    print('URL: ' + modFile.downloadUrl)
+def print_file(mod_file):
+    print('Filename: ' + mod_file.name)
+    print('Date: ' + mod_file.date)
+    print('Size: ' + format(mod_file.length/1024/1024, '.2f') + 'MB')
+    print('Release Type: ' + mod_file.release_type.name)
+    print('Game Versions: ' + ', '.join(mod_file.game_versions))
+    print('URL: ' + mod_file.download_url)
     print()
 
 if __name__ == '__main__':

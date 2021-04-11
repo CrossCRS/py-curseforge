@@ -26,7 +26,7 @@ class TestCurseforge(unittest.TestCase):
         self.assertIs(type(self.mod.files), list)
 
     def test_mod_files_by_game_version(self):
-        self.assertIs(type(self.mod.filesByGameVersion), dict)
+        self.assertIs(type(self.mod.files_by_game_version), dict)
     
     """ Test ModFile object """
     def test_mod_file(self):
@@ -39,11 +39,11 @@ class TestCurseforge(unittest.TestCase):
         self.assertTrue(self.mod.get_default_file().name.strip())
 
     def test_mod_file_download_url(self):
-        self.assertTrue(self.mod.get_default_file().downloadUrl.strip())
+        self.assertTrue(self.mod.get_default_file().download_url.strip())
 
     def test_mod_file_game_versions(self):
-        self.assertIs(type(self.mod.get_default_file().gameVersions), list)
-        self.assertGreater(len(self.mod.get_default_file().gameVersions), 0)
+        self.assertIs(type(self.mod.get_default_file().game_versions), list)
+        self.assertGreater(len(self.mod.get_default_file().game_versions), 0)
 
     """ Test exceptions """
     def test_invalid_mod_id(self):

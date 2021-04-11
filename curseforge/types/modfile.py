@@ -6,6 +6,6 @@ class ModFile:
         self.name = json_data['fileName']
         self.date = json_data['fileDate']
         self.length = json_data['fileLength']
-        self.releaseType = ModFileType(json_data['releaseType'])
-        self.downloadUrl = json_data['downloadUrl']
-        self.gameVersions = json_data['gameVersion']
+        self.release_type = ModFileType(json_data['releaseType'])
+        self.download_url = json_data['downloadUrl']
+        self.game_versions = json_data['gameVersion']
