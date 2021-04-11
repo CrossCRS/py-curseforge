@@ -1,7 +1,8 @@
-import curseforge
+from curseforge import CurseForge
 
 def main():
-    mod = curseforge.get_mod(32274) # Get a mod object by project id
+    cf = CurseForge()
+    mod = cf.get_mod(32274) # Get a mod object by project id
 
     print(mod.name) # Display name
     print(mod.slug) # Slug name

@@ -1,16 +1,19 @@
 import unittest
-import curseforge
+
+from curseforge import CurseForge
+from curseforge.types import Mod, ModFile, ModFileType
 
 MOD_ID_VALID = 32274
 
 class TestCurseforge(unittest.TestCase):
 
     def setUp(self):
-        self.mod = curseforge.get_mod(MOD_ID_VALID)
+        self.cf = CurseForge()
+        self.mod = self.cf.get_mod(MOD_ID_VALID)
 
     """ Test Mod object """
     def test_valid_mod(self):
-        self.assertIsInstance(self.mod, curseforge.Mod)
+        self.assertIsInstance(self.mod, Mod)
 
     def test_mod_id(self):
         self.assertIs(type(self.mod.id), int)
@@ -27,7 +30,7 @@ class TestCurseforge(unittest.TestCase):
     
     """ Test ModFile object """
     def test_mod_file(self):
-        self.assertIsInstance(self.mod.get_default_file(), curseforge.ModFile)
+        self.assertIsInstance(self.mod.get_default_file(), ModFile)
     
     def test_mod_file_id(self):
         self.assertIs(type(self.mod.get_default_file().id), int)
@@ -45,7 +48,7 @@ class TestCurseforge(unittest.TestCase):
     """ Test exceptions """
     def test_invalid_mod_id(self):
         with self.assertRaises(ValueError):
-            curseforge.get_mod(-1)
+            self.cf.get_mod(-1)
 
     def test_invalid_file_id(self):
         with self.assertRaises(ValueError):
