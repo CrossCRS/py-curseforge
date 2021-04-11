@@ -3,8 +3,23 @@ class Mod:
         self.id = json_data['id']
         self.name = json_data['name']
         self.slug = json_data['slug']
+        self.summary = json_data['summary']
+        self.date_modified = json_data['dateModified']
+        self.date_created = json_data['dateCreated']
+        self.date_released = json_data['dateReleased']
         self.files = files
         self.default_file_id = json_data['defaultFileId']
+        self.website_url = json_data['websiteUrl']
+        self.game_id = json_data['gameId']
+        self.game_slug = json_data['gameSlug']
+        self.game_name = json_data['gameName']
+        self.download_count = json_data['downloadCount']
+        self.is_featured = json_data['isFeatured']
+        self.popularity_score = json_data['popularityScore']
+        self.game_popularity_rank = json_data['gamePopularityRank']
+        self.primary_language = json_data['primaryLanguage']
+        self.is_available = json_data['isAvailable']
+        self.is_experimental = json_data['isExperiemental'] # Not a typo
         self.files_by_game_version = {}
 
         for f in json_data['gameVersionLatestFiles']:
