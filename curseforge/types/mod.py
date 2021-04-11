@@ -1,11 +1,14 @@
 class Mod:
-    def __init__(self, id, name, slug, files, defaultFileId, filesByGameVersion):
-        self.id = id
-        self.name = name
-        self.slug = slug
+    def __init__(self, json_data, files):
+        self.id = json_data['id']
+        self.name = json_data['name']
+        self.slug = json_data['slug']
         self.files = files
-        self.defaultFileId = defaultFileId
-        self.filesByGameVersion = filesByGameVersion
+        self.defaultFileId = json_data['defaultFileId']
+        self.filesByGameVersion = {}
+
+        for f in json_data['gameVersionLatestFiles']:
+            self.filesByGameVersion[f['gameVersion']] = int(f['projectFileId'])
 
     def get_file_by_id(self, fileId):
         """Returns a ModFile object of a file with specified fileId

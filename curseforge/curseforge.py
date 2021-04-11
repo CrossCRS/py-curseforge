@@ -15,7 +15,7 @@ class CurseForge:
         j = json.loads(res_body.decode('utf-8'))
 
         for modFile in j:
-            f = ModFile(int(modFile['id']), modFile['fileName'], modFile['fileDate'], modFile['fileLength'], modFile['releaseType'], modFile['downloadUrl'], modFile['gameVersion'])
+            f = ModFile(modFile)
             files.append(f)
 
         return files
@@ -40,11 +40,7 @@ class CurseForge:
             res_body = res.read()
             j = json.loads(res_body.decode('utf-8'))
 
-            fgv = {}
-            for f in j['gameVersionLatestFiles']:
-                fgv[f['gameVersion']] = int(f['projectFileId'])
-
-            mod = Mod(int(j['id']), j['name'], j['slug'], files, j['defaultFileId'], fgv)
+            mod = Mod(j, files)
             return mod
         except urllib.error.HTTPError as e:
             if e.code == 404:
