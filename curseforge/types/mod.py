@@ -2,7 +2,7 @@ from . import Author, Category
 
 class Mod:
     def __init__(self, json_data, files):
-        self.id = int(json_data['id'])
+        self.id = json_data['id']
         self.name = json_data['name']
         self.slug = json_data['slug']
         self.summary = json_data['summary']
@@ -11,14 +11,14 @@ class Mod:
         self.date_created = json_data['dateCreated']
         self.date_released = json_data['dateReleased']
         self.files = files
-        self.default_file_id = int(json_data['defaultFileId'])
+        self.default_file_id = json_data['defaultFileId']
         self.website_url = json_data['websiteUrl']
-        self.game_id = int(json_data['gameId'])
+        self.game_id = json_data['gameId']
         self.game_slug = json_data['gameSlug']
         self.game_name = json_data['gameName']
         self.download_count = json_data['downloadCount']
         self.categories = []
-        self.primary_category_id = int(json_data['primaryCategoryId'])
+        self.primary_category_id = json_data['primaryCategoryId']
         self.is_featured = json_data['isFeatured']
         self.popularity_score = json_data['popularityScore']
         self.game_popularity_rank = json_data['gamePopularityRank']
@@ -28,7 +28,7 @@ class Mod:
         self.files_by_game_version = {}
 
         for f in json_data['gameVersionLatestFiles']:
-            self.files_by_game_version[f['gameVersion']] = int(f['projectFileId'])
+            self.files_by_game_version[f['gameVersion']] = f['projectFileId']
         
         for author in json_data['authors']:
             self.authors.append(Author(author))
