@@ -6,6 +6,8 @@ def main():
 
     print(mod.name) # Display name
     print(mod.slug) # Slug name
+    print('Authors: ' + ', '.join(author.name for author in mod.authors))
+
     print(mod.get_supported_game_versions())
     print()
 

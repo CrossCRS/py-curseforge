@@ -1,9 +1,12 @@
+from .author import Author
+
 class Mod:
     def __init__(self, json_data, files):
         self.id = json_data['id']
         self.name = json_data['name']
         self.slug = json_data['slug']
         self.summary = json_data['summary']
+        self.authors = []
         self.date_modified = json_data['dateModified']
         self.date_created = json_data['dateCreated']
         self.date_released = json_data['dateReleased']
@@ -24,6 +27,9 @@ class Mod:
 
         for f in json_data['gameVersionLatestFiles']:
             self.files_by_game_version[f['gameVersion']] = int(f['projectFileId'])
+        
+        for author in json_data['authors']:
+            self.authors.append(Author(author))
 
     def get_file_by_id(self, file_id):
         """Returns a ModFile object of a file with specified file_id

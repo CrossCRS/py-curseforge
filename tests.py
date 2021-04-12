@@ -22,6 +22,9 @@ class TestCurseforge(unittest.TestCase):
         self.assertTrue(self.mod.name.strip())
         self.assertTrue(self.mod.slug.strip())
 
+    def test_mod_authors(self):
+        self.assertGreaterEqual(len(self.mod.authors), 1)
+
     def test_mod_files(self):
         self.assertIs(type(self.mod.files), list)
 
