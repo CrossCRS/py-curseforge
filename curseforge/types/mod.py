@@ -1,8 +1,8 @@
-from .author import Author
+from . import Author, Category
 
 class Mod:
     def __init__(self, json_data, files):
-        self.id = json_data['id']
+        self.id = int(json_data['id'])
         self.name = json_data['name']
         self.slug = json_data['slug']
         self.summary = json_data['summary']
@@ -11,12 +11,14 @@ class Mod:
         self.date_created = json_data['dateCreated']
         self.date_released = json_data['dateReleased']
         self.files = files
-        self.default_file_id = json_data['defaultFileId']
+        self.default_file_id = int(json_data['defaultFileId'])
         self.website_url = json_data['websiteUrl']
-        self.game_id = json_data['gameId']
+        self.game_id = int(json_data['gameId'])
         self.game_slug = json_data['gameSlug']
         self.game_name = json_data['gameName']
         self.download_count = json_data['downloadCount']
+        self.categories = []
+        self.primary_category_id = int(json_data['primaryCategoryId'])
         self.is_featured = json_data['isFeatured']
         self.popularity_score = json_data['popularityScore']
         self.game_popularity_rank = json_data['gamePopularityRank']
@@ -30,6 +32,9 @@ class Mod:
         
         for author in json_data['authors']:
             self.authors.append(Author(author))
+
+        for category in json_data['categories']:
+            self.categories.append(Category(category))
 
     def get_file_by_id(self, file_id):
         """Returns a ModFile object of a file with specified file_id
@@ -45,7 +50,7 @@ class Mod:
             If no file with specified file_id is found
         """
         for f in self.files:
-            if f.id == int(file_id):
+            if f.id == file_id:
                 return f
         else:
             raise ValueError('No file for specified file_id')
@@ -72,6 +77,14 @@ class Mod:
     def get_default_file(self):
         """Returns a ModFile object for the default file"""
         return self.get_file_by_id(self.default_file_id)
+
+    def get_primary_category(self):
+        """Returns a Category object for the primary category or None if no primary category is found"""
+        for category in self.categories:
+            if category.id == self.primary_category_id:
+                return category
+        else:
+            return None
 
     def get_supported_game_versions(self):
         """Returns a list of mod's supported game versions"""

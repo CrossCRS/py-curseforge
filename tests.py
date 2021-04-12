@@ -1,7 +1,7 @@
 import unittest
 
 from curseforge import CurseForge
-from curseforge.types import Mod, ModFile, ModFileType
+from curseforge.types import Author, Category, Mod, ModFile, ModFileType
 
 MOD_ID_VALID = 32274
 
@@ -24,6 +24,11 @@ class TestCurseforge(unittest.TestCase):
 
     def test_mod_authors(self):
         self.assertGreaterEqual(len(self.mod.authors), 1)
+        self.assertIsInstance(self.mod.authors[0], Author)
+
+    def test_mod_categories(self):
+        self.assertGreaterEqual(len(self.mod.categories), 1)
+        self.assertIsInstance(self.mod.categories[0], Category)
 
     def test_mod_files(self):
         self.assertIs(type(self.mod.files), list)

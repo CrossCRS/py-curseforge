@@ -9,8 +9,8 @@ class ModFile:
         self.length = json_data['fileLength']
         self.release_type = ModFileType(json_data['releaseType'])
         self.download_url = json_data['downloadUrl']
-        self.is_alternate = json_data['isAlternate']
-        self.alternate_file_id = json_data['alternateFileId']
-        self.server_pack_file_id = json_data['serverPackFileId']
-        self.is_available = json_data['isAvailable']
+        self.is_alternate = bool(json_data['isAlternate'])
+        self.alternate_file_id = int(json_data['alternateFileId']) if json_data['alternateFileId'] else None
+        self.server_pack_file_id = int(json_data['serverPackFileId']) if json_data['serverPackFileId'] else None
+        self.is_available = bool(json_data['isAvailable'])
         self.game_versions = json_data['gameVersion']
